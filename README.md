@@ -1,3 +1,13 @@
 # Three-Filters-to-Normal: An Accurate and Ultrafast Surface Normal Estimator
 
-## This work has FINALLY been accepted to RAL with ICRA today (Feb. 21, 2021). We will publish the code in March.
+
+## how to use?
+```shell
+user@ubuntu: mkdir build
+user@ubuntu: cd build
+user@ubuntu: cmake ..
+user@ubuntu: make 
+user@ubuntu: ./example
+```
+
+

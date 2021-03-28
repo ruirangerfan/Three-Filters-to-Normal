@@ -7,9 +7,9 @@
 *<sup>(a) RGB images; (b) Depth/Disparity Images; (c) Surface Normal Inferences.</sup>*
 
 ## 1. Publication:
-This [paper](https://arxiv.org/pdf/2005.08165.pdf) (arxiv preprint) was accepted to RA-L and ICRA'21. In this repository, we publish our MATLAB, C++, and CUDA code. 
+This [paper (arxiv preprint)](https://arxiv.org/pdf/2005.08165.pdf) was accepted to RA-L and ICRA'21. In this repository, we publish our MATLAB, C++, and CUDA code. 
 
-Please cite our [paper](https://ieeexplore.ieee.org/document/9381580) (IEEE published version) when using our source code or datasets:
+Please cite our [paper (IEEE published version)](https://ieeexplore.ieee.org/document/9381580) when using our source code or datasets:
 ```
 @article{fan2021-3f2n,
   title={Three-filters-to-normal: 

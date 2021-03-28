@@ -25,6 +25,10 @@ Rui Ranger Fan proposed 3F2N and completed the MATLAB and CUDA code; Bohuan Xue 
 ## 3. Demo Video:
 In this video, we demonstrated: (a) the performance of 3F2N w.r.t. different filter types/sizes; (b) comparisons between 3F2N and other SoTA algorithms; (c) experimental results on other public datasets containing depth/disparity images; (d) application of 3F2N in SLAM. Our proposed 3F2N can also be used for semantic driving scene segmentation tasks, as discussed in [SNE-RoadSeg, ECCV'21](https://arxiv.org/pdf/2008.11351.pdf).
 
+
+[![IMAGE ALT TEXT HERE](https://youtu.be/a_TdEHzvB5I/0.jpg)](https://youtu.be/a_TdEHzvB5I)
+
+
 <p align="center"><iframe width="500" height="281" src="https://www.youtube.com/embed/a_TdEHzvB5I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 

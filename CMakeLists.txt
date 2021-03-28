@@ -4,9 +4,8 @@ project(three-filters-to-normal)
 
 
 #you can change this version
-#你可以随意修改版本，但是third part里rgbd的代码有部分用的是3.2的(depth_to_3d)，具体会导致什么问题就不一定了.
-find_package(OpenCV 3.2.0 REQUIRED EXACT)
-find_package(Eigen3 3.0 REQUIRED)
+find_package(OpenCV 4.2.0 REQUIRED EXACT)
+find_package(Eigen3 3.3.7 REQUIRED)
 
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

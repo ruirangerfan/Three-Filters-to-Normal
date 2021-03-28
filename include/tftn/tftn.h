@@ -1,6 +1,4 @@
-//
-// Created by bohuan on 2019/10/18.
-//
+// Created by Bohuan Xue on 2019/10/18.
 
 #ifndef TFTN_RIN_H_
 #define TFTN_RIN_H_
@@ -21,9 +19,6 @@
 
 #include <avxintrin.h>
 #include <avx2intrin.h>
-
-//#include <linasm/Math.h>
-//#include <linasm/Math.h>
 #include <sse_mathfun.h>
 
 #define EPS 1e-7

@@ -6,8 +6,7 @@
 
 
 /**
-  * @brief 读取深度图像,范围是[0,1]范围内的
-  * 按照数据，格式应该是bin格式。
+  * @brief Read depth images (.bin files)
   * */
 cv::Mat LoadDepthImage(const std::string &path, const size_t width = 640,
                        const size_t height = 480){
@@ -28,7 +27,7 @@ int main(){
   cv::Mat result;
   cv::Mat output;
 
-  int n; //the number of depth images. 深度图的数量
+  int n; //the number of depth images. 
   std::string param = "../data/android/params.txt";
   FILE *f = fopen(param.c_str(), "r");
 
@@ -40,13 +39,12 @@ int main(){
   auto depth_image = LoadDepthImage("../data/android/depth/000001.bin", 640, 480);
   cv::Mat_<float> s(depth_image);
   for (auto &it : s){
-    if (fabs(it) < 1e-7){ //数据中的0值，实际上表示的是无穷远处。
+    if (fabs(it) < 1e-7){ //If the value equals 0, the point is infinite
       it = 1e10;
     }
   }
 
   //convert depth image to range image. watch out the problem of bgr and rgb.
-  //注意图片有rgb和bgr的区别
   cv::rgbd::depthTo3d(depth_image, camera, range_image);
   std::vector<cv::Mat> matpart(3);
   cv::split(range_image, matpart);

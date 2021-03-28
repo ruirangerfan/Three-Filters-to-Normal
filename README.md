@@ -5,11 +5,11 @@
 
 ## how to use?
 ```shell
-user@ubuntu: mkdir build
-user@ubuntu: cd build
-user@ubuntu: cmake ..
-user@ubuntu: make 
-user@ubuntu: ./example
+mkdir build
+cd build
+cmake ..
+make 
+./example
 ```
 
 

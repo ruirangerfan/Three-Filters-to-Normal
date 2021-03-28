@@ -1,3 +1,0 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.8)
-PROJECT(surface_normal_estimation_cvpr)
-ADD_SUBDIRECTORY(src)

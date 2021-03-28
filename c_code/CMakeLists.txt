@@ -34,7 +34,7 @@ include_directories(
 )
 
 add_executable(example
-        test/example.cpp
+        example/demo.cpp
         include/ThirdParty/cvrgbd/src/depth_to_3d.cpp
         include/ThirdParty/cvrgbd/src/utils.cpp
         )

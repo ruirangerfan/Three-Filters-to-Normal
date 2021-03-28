@@ -4,9 +4,9 @@
 
 
 ## how to use?
-```shell
-mkdir build
-cd build
+```
+mkdir c_code/build
+cd c_code/build
 cmake ..
 make 
 ./example

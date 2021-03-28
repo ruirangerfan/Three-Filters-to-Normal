@@ -43,12 +43,10 @@ This project used 24 3-D mesh models from [Free3D](https://free3d.com/) to creat
 <img src='./figs/experimental_results.png' width=500px>
 </p>
 
-<sup>
-*(1)–(5) columns on (a), (d) and (g) rows show the 3-D mesh models, depth images, surface normal ground truth
+*<sup>(1)–(5) columns on (a), (d) and (g) rows show the 3-D mesh models, depth images, surface normal ground truth
 and the experimental results obtained using FD-Mean and FD-Median SNEs (ours), respectively; (1)–(5) columns on (b), (e) and (h) rows show the angular error
 maps obtained by PlaneSVD/PlanePCA, VectorSVD, AreaWeighted, AngleWeighted, and FALS SNEs, respectively; (1)–(5) columns on
-(c), (f) and (i) rows show the angular error maps obtained by SRI, LINE-MOD, SNE-RoadSeg, FD-Mean and FD-Median SNEs, respectively.*
-</sup>
+(c), (f) and (i) rows show the angular error maps obtained by SRI, LINE-MOD, SNE-RoadSeg, FD-Mean and FD-Median SNEs, respectively.</sup>*
 
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 

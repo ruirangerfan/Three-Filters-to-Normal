@@ -3,6 +3,7 @@
 <p align="center">
 <img src='./figs/demo_fig.png' width=600px>
 </p>
+
 *<sup>(a) RGB images; (b) Depth/Disparity Images; (c) Surface Normal Inferences.</sup>*
 
 ## 1. Publication:

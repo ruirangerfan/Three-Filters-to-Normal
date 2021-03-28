@@ -57,7 +57,7 @@ maps obtained by PlaneSVD/PlanePCA, VectorSVD, AreaWeighted, AngleWeighted, and 
 
 ### 5.1. Matlab code
 
-Navigate to `matlab_code` and run `demo.m`, a result and the corresponding error map (degrees) will be displayed.
+Navigate to `[matlab_code](./matlab_code)` and run `demo.m`, a result and the corresponding error map (degrees) will be displayed.
 
 ### 5.2. C++ code
 

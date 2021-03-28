@@ -30,7 +30,7 @@ Rui Ranger Fan proposed 3F2N and completed the MATLAB and CUDA code; Bohuan Xue 
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 
 ## 3. Demo Video:
-In this [video](https://www.youtube.com/watch?v=a_TdEHzvB5I), we demonstrated: (a) the performance of 3F2N w.r.t. different filter types/sizes; (b) comparisons between 3F2N and other SoTA algorithms; (c) experimental results on other public datasets containing depth/disparity images; (d) application of 3F2N in SLAM. Our proposed 3F2N can also be used for semantic driving scene segmentation tasks, as discussed in [SNE-RoadSeg, ECCV'21](https://arxiv.org/pdf/2008.11351.pdf).
+In this [video](https://www.youtube.com/watch?v=a_TdEHzvB5I), we demonstrated: (a) the performance of 3F2N w.r.t. different filter types/sizes; (b) comparisons between 3F2N and other SoTA algorithms; (c) experimental results on other public datasets containing depth/disparity images; (d) application of 3F2N in SLAM. Our proposed 3F2N can also be used for semantic driving scene segmentation tasks, as discussed in [SNE-RoadSeg, ECCV'21](https://www.ruirangerfan.com/pdf/eccv2020_fan.pdf).
 
 <p align="center">
 <img src='./figs/video.gif' width=500px>
@@ -57,7 +57,7 @@ maps obtained by PlaneSVD/PlanePCA, VectorSVD, AreaWeighted, AngleWeighted, and 
 
 ### 5.1. Matlab code
 
-Navigate to [matlab_code](https://github.com/ruirangerfan/three_filters_to_normal/tree/master/matlab_code) and run `demo.m`, a result and the corresponding error map (degrees) will be displayed.
+Navigate to [matlab_code](https://github.com/ruirangerfan/Three-Filteres-to-Normal/tree/master/matlab_code) and run `demo.m`, a result and the corresponding error map (degrees) will be displayed.
 
 ### 5.2. C++ code
 

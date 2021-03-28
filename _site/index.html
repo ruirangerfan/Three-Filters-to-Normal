@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Three-Filters-to-Normal (3F2N): An Accurate and Ultrafast Surface Normal Estimator | three_filters_to_normal</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Three-Filters-to-Normal (3F2N): An Accurate and Ultrafast Surface Normal Estimator" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Three-Filters-to-Normal: An Accurate and Ultrafast Surface Normal Estimator (RAL+ICRA’21)" />
+<meta property="og:description" content="Three-Filters-to-Normal: An Accurate and Ultrafast Surface Normal Estimator (RAL+ICRA’21)" />
+<link rel="canonical" href="http://localhost:4000/" />
+<meta property="og:url" content="http://localhost:4000/" />
+<meta property="og:site_name" content="three_filters_to_normal" />
+<script type="application/ld+json">
+{"headline":"Three-Filters-to-Normal (3F2N): An Accurate and Ultrafast Surface Normal Estimator","url":"http://localhost:4000/","@type":"WebSite","description":"Three-Filters-to-Normal: An Accurate and Ultrafast Surface Normal Estimator (RAL+ICRA’21)","name":"three_filters_to_normal","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=6c5a7310184a0479ee471c66e36ea5a5aebf7973">
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">three_filters_to_normal</a></h1>
+      
+
+      <h1 id="three-filters-to-normal-3f2n-an-accurate-and-ultrafast-surface-normal-estimator">Three-Filters-to-Normal (3F2N): An Accurate and Ultrafast Surface Normal Estimator</h1>
+
+<h2 id="1-publication">1. Publication:</h2>
+<p>This <a href="https://arxiv.org/pdf/2005.08165.pdf">paper</a> (arxiv preprint) was accepted to RA-L and ICRA’21. In this repository, we publish our MATLAB, C++, and CUDA code.</p>
+
+<p>Please cite our <a href="https://ieeexplore.ieee.org/document/9381580">paper</a> (IEEE published version) when using our source code or datasets:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@article{fan2021-3f2n,
+  title={Three-filters-to-normal: an accurate and ultrafast surface normal estimator},
+  author={Fan, Rui and Wang, Hengli and Xue, Bohuan and Huang,
+   Huaiyang and Wang, Yuan and Liu, Ming and Pitas, Ioannis},
+  journal={IEEE Robotics and Automation Letters (RA-L)},
+  doi={10.1109/LRA.2021.3067308},
+  year={2021}
+}
+</code></pre></div></div>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray" />
+
+<h2 id="2-contributions">2. Contributions:</h2>
+
+<p>Rui Ranger Fan proposed 3F2N and completed the MATLAB and CUDA code; Bohuan Xue completed the C++ code; Hengli Wang and Huaiyang Huang created the large-scale datasets that were used for quantifying algorithm performance; Huaiyang Huang explored the application of 3F2N in 3-D reconstruction; Yuan Wang studied the usability of CNN in 3F2N; Hengli Wang and Bohuan Xue carried out algorithm evaluations; Ming Liu and Ioannis Pitas provided comments and suggestions on paper writing. <a href="https://github.com/ruirangerfan">Rui Ranger Fan</a>, <a href="https://github.com/hlwang1124">Hengli Wang</a>, and <a href="https://github.com/byronsit">Bohuan Xue</a> contributed equally to this work.</p>
+
+<hr style="height:2px;border-width:0;color:gray;background-color:gray" />
+
+<h2 id="3-demo-video">3. Demo Video:</h2>
+<p>In this video, we demonstrated: (a) the performance of 3F2N w.r.t. different filter types/sizes; (b) comparisons between 3F2N and other SoTA algorithms; (c) experimental results on other public datasets containing depth/disparity images; (d) application of 3F2N in SLAM. Our proposed 3F2N can also be used for semantic driving scene segmentation tasks, as discussed in <a href="https://arxiv.org/pdf/2008.11351.pdf">SNE-RoadSeg, ECCV’21</a>.</p>
+
+<p align="center"><iframe width="500" height="281" src="https://www.youtube.com/embed/a_TdEHzvB5I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></p>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray" />
+
+<h2 id="4-datasets">4. Datasets</h2>
+
+<p>This project used 24 3-D mesh models from <a href="https://free3d.com/">Free3D</a> to create three datasets (eight models in each dataset). According to different difficulty levels, we name our datasets <strong>easy, medium, and hard</strong>, respectively. Each 3-D mesh model is first fixed at a certain position. A virtual range sensor with pre-set intrinsic parameters is then used to capture depth images at 1800–2500 different view points. At each view point, a 480x640 pixel depth image is generated by rendering the 3-D mesh model using OpenGL Shading Language (GLSL). However, since the OpenGL rendering process applies linear interpolation by default, rendering surface normal images is infeasible. Hence, the surface normal of each triangle, constructed by three mesh vertices, is considered to be the ground truth surface normal of any 3-D points residing on this triangle. <strong>The <a href="https://sites.google.com/view/3f2n/datasets">datasets</a> are publicly available for research purposes</strong>.</p>
+
+<h2 id="5-source-code">5. Source Code</h2>
+
+<h3 id="51-matlab-code">5.1. Matlab code</h3>
+
+<p>Navigate to <code class="language-plaintext highlighter-rouge">matlab_code</code> and run <code class="language-plaintext highlighter-rouge">demo.m</code>, a result and the corresponding error map (degrees) will be displayed.</p>
+
+<h3 id="52-c-code">5.2. C++ code</h3>
+
+<p>Step 1: Install <a href="https://eigen.tuxfamily.org/dox/">Eigen</a> library and <a href="https://opencv.org/">OpenCV</a>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install libeigen3-dev
+sudo apt-get install libopencv-dev
+</code></pre></div></div>
+
+<p>Step 2: Run the following commands:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir c_code/build
+cd c_code/build
+cmake ..
+make 
+./example
+</code></pre></div></div>
+
+<h3 id="53-cuda-code">5.3. CUDA code</h3>
+
+<p>Similar to the C++ code, please use CMake to build the environment and run <code class="language-plaintext highlighter-rouge">main.cu</code>.</p>
+
+<h2 id="6-contact">6. Contact</h2>
+
+<p>Please feel free to drop me emails (Rui Fan, <a href="rui.fan@ieee.org">rui.fan@ieee.org</a>) if you have any questions.</p>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/ruirangerfan/three_filters_to_normal/edit/gh-pages/README.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+    
+  </body>
+</html>

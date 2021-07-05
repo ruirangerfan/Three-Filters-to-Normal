@@ -11,14 +11,15 @@ This [paper (arxiv preprint)](https://arxiv.org/pdf/2005.08165.pdf) was accepted
 
 Please cite our [paper (IEEE published version)](https://ieeexplore.ieee.org/document/9381580) when using our source code or datasets:
 ```
-@article{fan2021-3f2n,
-  title={Three-filters-to-normal: 
-  an accurate and ultrafast surface normal estimator},
-  author={Fan, Rui and Wang, Hengli and Xue, Bohuan and Huang, Huaiyang 
-  and Wang, Yuan and Liu, Ming and Pitas, Ioannis},
-  journal={IEEE Robotics and Automation Letters (RA-L)},
-  doi={10.1109/LRA.2021.3067308},
-  year={2021}
+@article{fan2021three,
+  title={Three-filters-to-normal: An accurate and ultrafast surface normal estimator},
+  author={Fan, Rui and Wang, Hengli and Xue, Bohuan and Huang, Huaiyang and Wang, Yuan and Liu, Ming and Pitas, Ioannis},
+  journal={IEEE Robotics and Automation Letters},
+  volume={6},
+  number={3},
+  pages={5405--5412},
+  year={2021},
+  publisher={IEEE}
 }
 ```
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -30,7 +31,7 @@ Rui Ranger Fan proposed 3F2N and completed the MATLAB and CUDA code; Bohuan Xue 
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 
 ## 3. Demo Video:
-In this [video](https://www.youtube.com/watch?v=a_TdEHzvB5I), we demonstrated: (a) the performance of 3F2N w.r.t. different filter types/sizes; (b) comparisons between 3F2N and other SoTA algorithms; (c) experimental results on other public datasets containing depth/disparity images; (d) application of 3F2N in SLAM. Our proposed 3F2N can also be used for semantic driving scene segmentation tasks, as discussed in [SNE-RoadSeg, ECCV'21](https://www.ruirangerfan.com/pdf/eccv2020_fan.pdf).
+In this [video](https://www.youtube.com/watch?v=a_TdEHzvB5I), we demonstrated: (a) the performance of 3F2N w.r.t. different filter types/sizes; (b) comparisons between 3F2N and other SoTA algorithms; (c) experimental results on other public datasets containing depth/disparity images; (d) application of 3F2N in SLAM. Our proposed 3F2N can also be used for semantic driving scene segmentation tasks, as discussed in [SNE-RoadSeg, ECCV'20](https://www.ruirangerfan.com/pdf/eccv2020_fan.pdf).
 
 <p align="center">
 <img src='./figs/video.gif' width=500px>

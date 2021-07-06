@@ -12,14 +12,15 @@ This [paper (arxiv preprint)](https://arxiv.org/pdf/2005.08165.pdf) was accepted
 Please cite our [paper (IEEE published version)](https://ieeexplore.ieee.org/document/9381580) when using our source code or datasets:
 ```
 @article{fan2021three,
-  title={Three-filters-to-normal: An accurate and ultrafast surface normal estimator},
-  author={Fan, Rui and Wang, Hengli and Xue, Bohuan and Huang, Huaiyang and Wang, Yuan and Liu, Ming and Pitas, Ioannis},
-  journal={IEEE Robotics and Automation Letters},
-  volume={6},
-  number={3},
-  pages={5405--5412},
-  year={2021},
-  publisher={IEEE}
+  title     = {Three-filters-to-normal: An accurate and ultrafast surface normal estimator},
+  author    = {Fan, Rui and Wang, Hengli and Xue, Bohuan and Huang, Huaiyang and Wang, Yuan and Liu, Ming and Pitas, Ioannis},
+  journal   = {IEEE Robotics and Automation Letters},
+  volume    = {6},
+  number    = {3},
+  pages     = {5405--5412},
+  year      = {2021},
+  publisher = {IEEE},
+  doi       = {10.1109/LRA.2021.3067308}
 }
 ```
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">

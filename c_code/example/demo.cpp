@@ -23,11 +23,7 @@ cv::Mat LoadDepthImage(const std::string &path, const size_t width = 640,
 }
 
 int main(){
-  cv::Mat range_image;
-  cv::Mat result;
-  cv::Mat output;
-
-  int n; //the number of depth images. 
+  int n; //the number of depth images.
   std::string param = "../data/android/params.txt";
   FILE *f = fopen(param.c_str(), "r");
 

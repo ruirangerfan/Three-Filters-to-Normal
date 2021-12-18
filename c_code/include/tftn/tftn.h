@@ -6,7 +6,6 @@
 #include <opencv2/opencv.hpp>
 #include <algorithm>
 #include <numeric>
-#include <VCL/vectorclass.h>
 #include <iostream>
 
 

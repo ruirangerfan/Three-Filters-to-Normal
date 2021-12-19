@@ -9,13 +9,13 @@
 #include <iostream>
 
 
-enum TFTN_METHOD{R_MEANS_8,
-  R_MEDIAN_FAST_8,
-  R_MEDIAN_STABLE_8,
-  R_MEANS_4,
-  R_MEDIAN_4,
-  R_MEDIAN_FAST_4_8,
-  R_MEDIAN_STABLE_4_8,
+enum TFTN_METHOD{R_MEANS_8,  //8点均值法，比较快，精准低一些.
+  R_MEDIAN_FAST_8, //8点快速中值，时间和精度介于 8点均值和8点完整中值之间.
+  R_MEDIAN_STABLE_8,  //8点稳定中值，时间慢，精度高.
+  R_MEANS_4,  //4点均值， 速度快，精度高.
+  R_MEDIAN_4,  //4点中值， 速度稍快，精度一般.(目前来看不推荐，没啥价值).
+  R_MEDIAN_FAST_4_8, //用4个点求梯度，但是算中值用周围8个点.
+  R_MEDIAN_STABLE_4_8, //用4个点求梯度，但是算中值用周围8个点.
   R_MEANS_4_8,
   R_MEANS_SOBEL,
   R_MEDIAN_SOBEL,

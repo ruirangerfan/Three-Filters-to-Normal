@@ -17,8 +17,8 @@
  * @param[out] image
  * @parm[out] channel_names
  * */
-void readexr(std::string path, std::vector<cv::Mat> image, std::vector<std::string> channel_name);
-
+//extern
+void readexr(std::string path, std::vector<cv::Mat> &image, std::vector<std::string> &channel_name);
 
 
 

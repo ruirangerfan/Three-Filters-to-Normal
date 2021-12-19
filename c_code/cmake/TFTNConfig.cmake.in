@@ -1,0 +1,9 @@
+set(TFTN_INCLUDE_DIRS "@CMAKE_INSTALL_INCLUDEDIR@/@CMAKE_PROJECT_NAME@")
+
+#获取CMAKE当前LIST的file的名字
+#get_filename_component(_dir "${CMAKE_CURRENT_LIST_FILE}" DIRECTORY)
+#message('显示dir:'${_dir})
+#include("${_dir}/@CMAKE_PROJECT_NAME@.cmake")
+
+set(TFTN_LIBRARIES "@CMAKE_PROJECT_NAME@")
+set(TFTN_LIBS "-l@CMAKE_PROJECT_NAME@ -l@CMAKE_PROJECT_NAME@_readexr")

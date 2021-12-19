@@ -62,20 +62,22 @@ message(${ALL_SOURCES})
 
 
 #add_library(tftn_static STATIC include/tftn/tftn.cpp)
-add_library(tftn_static STATIC include/tftn/tftn.cpp)
-add_library(tftn_dynamic SHARED include/tftn/tftn.cpp include/tftn/readexr.cpp include/tftn/readexr.h)
+add_library(tftn_static         STATIC   include/tftn/tftn.cpp )
+add_library(tftn_readexr_static STATIC   include/tftn/readexr.cpp)
+add_library(tftn_dynamic SHARED include/tftn/tftn.cpp  )
 
 #set(LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 #set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 SET_TARGET_PROPERTIES(tftn_static PROPERTIES OUTPUT_NAME "tftn") #modify the static file name
 SET_TARGET_PROPERTIES(tftn_dynamic PROPERTIES OUTPUT_NAME "tftn") #modify the static file name
+SET_TARGET_PROPERTIES(tftn_readexr_static PROPERTIES OUTPUT_NAME "tftn_readexr") #modify the static file name
 
 
 include_directories(
         ${OpenCV_INCLUDE_DIRS}
         ${PROJECT_NAME}
-        include
-        ThirdParty
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/ThirdParty
 )
 
 #add_executable(example
@@ -113,12 +115,13 @@ message( "${BoldBlue}install include dir:"${ColourReset}\n ${CMAKE_INSTALL_INCLU
 
 #export(EXPORT tftn NAMESPACE tftn:: FILE hahaha.cmake)
 #主要用于生成一个 TFTNTargets.cmake，用来给其他目录做子目录时候用。教程https://blog.csdn.net/weixin_30379531/article/details/98589931
-export(TARGETS tftn_static #tftn_dynamic
+
+export(TARGETS  tftn_readexr_static tftn_static   #tftn_dynamic
         APPEND FILE "${CMAKE_BINARY_DIR}/TFTNTargets.cmake"
         )
 
 install(
-        TARGETS tftn_static #tftn_dynamic
+        TARGETS   tftn_readexr_static tftn_static #tftn_dynamic
         DESTINATION lib
         EXPORT ${PROJECT_NAME} #不知道为啥这里只能是这个project_name
 ) #安装静态链接库
@@ -141,3 +144,13 @@ message("!!"${CMAKE_CURRENT_LIST_FILE})
 
 #set(CMAKE_MODULE_PATH ${CMAKE_ROOT}/Modules)
 # https://zhuanlan.zhihu.com/p/422919663 CMake编写install export
+
+
+
+return()
+
+get_cmake_property(_variableNames VARIABLES)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
+

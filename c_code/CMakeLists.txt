@@ -25,6 +25,10 @@ set(BoldWhite   "${Esc}[1;37m")
 #you can change this version
 find_package(OpenCV  REQUIRED)
 find_package(PythonLibs REQUIRED) #默认支持python3,不想支持2
+find_package(Boost COMPONENTS system thread program_options)
+find_package(pybind11 REQUIRED)
+
+
 
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -69,7 +73,7 @@ add_library(tftn_static         STATIC   include/tftn/tftn.cpp )
 add_library(tftn_dynamic SHARED include/tftn/tftn.cpp  )
 
 add_library(tftn_readexr_dynamic SHARED   include/tftn/readexr.cpp)
-add_library(tftn_readexr_py SHARED include/tftn/py_readexr.cpp)
+add_library(tftn_readexr_py SHARED include/tftn/py_readexr.cpp  ) #正常还需要添加include/tftn/readexr.cpp
 #add_library(tftn_readexr_cv SHARED include/tftn/cv_readexr.cpp)
 #add_library(tftn_readexr SHARED include/tftn/readexr.cpp)
 
@@ -85,9 +89,14 @@ include_directories(
         ${CMAKE_SOURCE_DIR}/include
         ${CMAKE_SOURCE_DIR}/ThirdParty
         ${PYTHON_INCLUDE_DIR}
+        ${pybind11_INCLUDE_DIRS}
 )
-add_dependencies(tftn_readexr_py tftn_readexr_dynamic )
+#add_dependencies(tftn_readexr_py tftn_readexr_dynamic )
 
+#add_subdirectory(pybind11)
+#链接第三方库的时候，要加上PRIVATE
+#pybind11_add_module(Pypcc ${PROJECT_SOURCE_DIR}/include/tftn/py_readexr.cpp)
+pybind11_add_module(Pypcc ${PROJECT_SOURCE_DIR}/pybind11/py_reader.cpp)
 
 #add_executable(example
 #        example/demo.cpp
@@ -159,6 +168,7 @@ message("!!"${CMAKE_CURRENT_LIST_FILE})
 
 return()
 
+#debug用的代码
 get_cmake_property(_variableNames VARIABLES)
 foreach (_variableName ${_variableNames})
     message(STATUS "${_variableName}=${${_variableName}}")

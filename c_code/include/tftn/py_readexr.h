@@ -14,7 +14,9 @@
 #include <Python.h>
 #include <numpy/arrayobject.h>
 
- PyObject* ReadEXRPY(std::string input_path);
+extern "C" {
+PyObject *ReadEXRPY(char* input_path);
+}
 
 
 

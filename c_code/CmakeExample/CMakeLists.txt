@@ -4,7 +4,7 @@ project(tftn_cmake_example)
 
 
 add_definitions(-std=c++17)
-find_package(OpenCV 4.5.0 REQUIRED)
+find_package(OpenCV  REQUIRED)
 find_package(TFTN REQUIRED)
 find_package(PythonLibs REQUIRED) #默认支持python3,不想支持2
 
@@ -33,10 +33,6 @@ add_executable(demo
 #openexr can only be used in CXX14
 set_property(TARGET demo PROPERTY CXX_STANDARD 17)
 
-
-
-
-
 message("TFTN libs:" ${TFTN_LIBS})
 
 target_link_libraries(demo
@@ -47,11 +43,9 @@ target_link_libraries(demo
         )
 
 
-
-
 add_executable(loadpy
-${CMAKE_SOURCE_DIR}/loadpy.cpp
-)
+        ${CMAKE_SOURCE_DIR}/loadpy.cpp
+        )
 target_link_libraries(loadpy
         ${TFTN_LIBS}
         ${OpenCV_LIBS}
@@ -62,8 +56,8 @@ target_link_libraries(loadpy
 
 
 
-    return()
-    get_cmake_property(_variableNames VARIABLES)
-    foreach (_variableName ${_variableNames})
-        message(STATUS "${_variableName}=${${_variableName}}")
-    endforeach()
+return()
+get_cmake_property(_variableNames VARIABLES)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()

@@ -7,10 +7,7 @@
 #include <xmmintrin.h>
 #include <emmintrin.h>
 
-#include <unistd.h>
 #include <chrono>
-
-#include <x86intrin.h>
 
 #include <opencv2/opencv.hpp>
 #include <algorithm>
@@ -20,6 +17,10 @@
 
 #include <avxintrin.h>
 #include <avx2intrin.h>
+#include <x86intrin.h>
+#include <unistd.h>
+
+
 #include <sse_mathfun.h>
 
 #include "tftn.h"

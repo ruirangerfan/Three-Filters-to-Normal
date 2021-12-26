@@ -2,3 +2,4 @@ lib/*
 cmake-build-debug
 *.user
 build
+.vs

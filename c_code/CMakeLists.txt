@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(tftn)
+#todo 用模块区分，不一定安装opencv模块或者python模块
 
 
 string(ASCII 27 Esc)
@@ -23,13 +24,13 @@ set(BoldWhite   "${Esc}[1;37m")
 
 #you can change this version
 find_package(OpenCV  REQUIRED)
-#find_package(Ceres REQUIRED)
-#find_package(Eigen3 REQUIRED)
+find_package(PythonLibs REQUIRED) #默认支持python3,不想支持2
 
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native -mfma -msse2 -msse3 -msse4")
+
 message("${Green}install path: ${CMAKE_INSTALL_PREFIX}${ColourReset}")
 #set(CMAKE_INSTALL_PREFIX "/opt/tftn")
 
@@ -63,14 +64,19 @@ message(${ALL_SOURCES})
 
 #add_library(tftn_static STATIC include/tftn/tftn.cpp)
 add_library(tftn_static         STATIC   include/tftn/tftn.cpp )
-add_library(tftn_readexr_static STATIC   include/tftn/readexr.cpp)
+#add_library(tftn_readexr_static STATIC   include/tftn/readexr.cpp)
+
 add_library(tftn_dynamic SHARED include/tftn/tftn.cpp  )
 
-#set(LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
-#set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+add_library(tftn_readexr_dynamic SHARED   include/tftn/readexr.cpp)
+add_library(tftn_readexr_py SHARED include/tftn/py_readexr.cpp)
+#add_library(tftn_readexr_cv SHARED include/tftn/cv_readexr.cpp)
+#add_library(tftn_readexr SHARED include/tftn/readexr.cpp)
+
 SET_TARGET_PROPERTIES(tftn_static PROPERTIES OUTPUT_NAME "tftn") #modify the static file name
 SET_TARGET_PROPERTIES(tftn_dynamic PROPERTIES OUTPUT_NAME "tftn") #modify the static file name
-SET_TARGET_PROPERTIES(tftn_readexr_static PROPERTIES OUTPUT_NAME "tftn_readexr") #modify the static file name
+#SET_TARGET_PROPERTIES(tftn_readexr_static PROPERTIES OUTPUT_NAME "tftn_readexr") #modify the static file name
+SET_TARGET_PROPERTIES(tftn_readexr_dynamic PROPERTIES OUTPUT_NAME "tftn_readexr") #modify the static file name
 
 
 include_directories(
@@ -78,7 +84,10 @@ include_directories(
         ${PROJECT_NAME}
         ${CMAKE_SOURCE_DIR}/include
         ${CMAKE_SOURCE_DIR}/ThirdParty
+        ${PYTHON_INCLUDE_DIR}
 )
+add_dependencies(tftn_readexr_py tftn_readexr_dynamic )
+
 
 #add_executable(example
 #        example/demo.cpp
@@ -116,12 +125,13 @@ message( "${BoldBlue}install include dir:"${ColourReset}\n ${CMAKE_INSTALL_INCLU
 #export(EXPORT tftn NAMESPACE tftn:: FILE hahaha.cmake)
 #主要用于生成一个 TFTNTargets.cmake，用来给其他目录做子目录时候用。教程https://blog.csdn.net/weixin_30379531/article/details/98589931
 
-export(TARGETS  tftn_readexr_static tftn_static   #tftn_dynamic
+
+export(TARGETS  tftn_readexr_dynamic tftn_readexr_py  tftn_static   #tftn_dynamic
         APPEND FILE "${CMAKE_BINARY_DIR}/TFTNTargets.cmake"
         )
 
 install(
-        TARGETS   tftn_readexr_static tftn_static #tftn_dynamic
+        TARGETS  tftn_readexr_dynamic tftn_readexr_py  tftn_static #tftn_dynamic
         DESTINATION lib
         EXPORT ${PROJECT_NAME} #不知道为啥这里只能是这个project_name
 ) #安装静态链接库

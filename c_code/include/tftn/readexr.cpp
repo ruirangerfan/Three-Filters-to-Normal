@@ -77,56 +77,54 @@ inline void getChannelNames(const ChannelList & channels,
     }
 }
 
+void readexr(std::string path, std::vector<cv::Mat> &image,
+             std::vector<std::string> &channel_name) {
+  InputFile img(path.c_str());
+  const ChannelList &channels = img.header().channels();
+  std::vector<std::string> &channelNames = channel_name;
 
+  // Prepare the framebuffer
+  const Box2i &dw = img.header().dataWindow();
+  const ChannelList &imgChannels = img.header().channels();
 
-void readexr(std::string path, std::vector<cv::Mat> &image, std::vector<std::string> &channel_name){
-    InputFile img(path.c_str());
-    const ChannelList & channels = img.header().channels();
-    std::vector<std::string>& channelNames = channel_name;
+  //获取所有的channel的名字，并返回
+  getChannelNames(channels, channelNames);
+  // for (int i = 0; i < channelNames.size(); ++ i){
+  //    std::cout<< channelNames.at(i)<< std::endl;
+  //}
 
-    // Prepare the framebuffer
-    const Box2i & dw = img.header().dataWindow();
-    const ChannelList & imgChannels = img.header().channels();
+  //设置对应的buffer,设置好
+  FrameBuffer framebuffer;
+  prepareFrameBuffer(framebuffer, dw, imgChannels, channelNames);
+  //std::cout << channelNames.size() << std::endl;
+  image.resize(channelNames.size());
+  // Actually read the pixels
 
+  // std::cout<<"@"<<std::endl;
+  img.setFrameBuffer(framebuffer);  //设置好，
 
-    //获取所有的channel的名字，并返回
-    getChannelNames(channels, channelNames);
-    //for (int i = 0; i < channelNames.size(); ++ i){
-    //    std::cout<< channelNames.at(i)<< std::endl;
-    //}
+  // std::cout<<"准备读取"<<std::endl;
+  img.readPixels(dw.min.y, dw.max.y);
 
-    //设置对应的buffer,设置好
-    FrameBuffer framebuffer;
-    prepareFrameBuffer(framebuffer, dw, imgChannels, channelNames);
-    std::cout<<channelNames.size() << std::endl;
-    image.resize(channelNames.size());
-    // Actually read the pixels
+  // std::cout<<"读取完毕"<<std::endl;
 
-    //std::cout<<"@"<<std::endl;
-    img.setFrameBuffer(framebuffer);  //设置好，
+  const int width = dw.max.x - dw.min.x + 1;
+  const int height = dw.max.y - dw.min.y + 1;
 
-    //std::cout<<"准备读取"<<std::endl;
-    img.readPixels(dw.min.y, dw.max.y);
+  for (int i = 0; i < channelNames.size(); ++i) {
+    // std::cout<<"@" << i << std::endl;
+    image.at(i) = cv::Mat(height, width, CV_32F);
+    memset(image.at(i).data, 0, sizeof((height * width) * sizeof(float)));
+    // std::cout<<"@@aa" << std::endl;
 
-    //std::cout<<"读取完毕"<<std::endl;
+    // std::cout<<"@@bb" << std::endl;
+    // std::cout<<"数据开始转移到cv mat格式上"<<std::endl;
+    memmove(image.at(i).data, frame_data.at(i).data(),
+            (height * width) * sizeof(float));
 
-    const int width  = dw.max.x - dw.min.x + 1;
-    const int height = dw.max.y - dw.min.y + 1;
-
-
-    for (int i = 0; i < channelNames.size(); ++ i){
-        //std::cout<<"@" << i << std::endl;
-        image.at(i) = cv::Mat(height, width, CV_32F);
-        memset(image.at(i).data, 0, sizeof((height*width)*sizeof(float)));
-        //std::cout<<"@@aa" << std::endl;
-
-        //std::cout<<"@@bb" << std::endl;
-        //std::cout<<"数据开始转移到cv mat格式上"<<std::endl;
-        memmove(image.at(i).data, frame_data.at(i).data(), (height*width)*sizeof(float));
-
-        //std::cout<<"@@cc" << std::endl;
-        //std::cout<<"转移成功，显示图片"<<std::endl;
-        //cv::imshow("abc", image.at(i));
-        //cv::waitKey(-1);
-    }
+    // std::cout<<"@@cc" << std::endl;
+    // std::cout<<"转移成功，显示图片"<<std::endl;
+    // cv::imshow("abc", image.at(i));
+    // cv::waitKey(-1);
+  }
 }

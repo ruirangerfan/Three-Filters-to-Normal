@@ -24,7 +24,7 @@ set(BoldWhite   "${Esc}[1;37m")
 
 #you can change this version
 find_package(OpenCV  REQUIRED)
-find_package(PythonLibs REQUIRED) #默认支持python3,不想支持2
+find_package(PythonLibs 3.6 REQUIRED EXACT) #这里可以修改python的版本号
 find_package(Boost COMPONENTS system thread program_options)
 find_package(pybind11 REQUIRED)
 
@@ -96,33 +96,16 @@ include_directories(
 #add_subdirectory(pybind11)
 #链接第三方库的时候，要加上PRIVATE
 #pybind11_add_module(Pypcc ${PROJECT_SOURCE_DIR}/include/tftn/py_readexr.cpp)
-pybind11_add_module(Pypcc ${PROJECT_SOURCE_DIR}/pybind11/py_reader.cpp)
+pybind11_add_module(readexr_py ${PROJECT_SOURCE_DIR}/pybind11/py_reader.cpp)
 
-#add_executable(example
-#        example/demo.cpp
-#        #include/tftn/tftn.cpp
-#        ThirdParty/cvrgbd/src/depth_to_3d.cpp
-#        ThirdParty/cvrgbd/src/utils.cpp
-#        )
+add_dependencies(readexr_py PRIVATE tftn_readexr_dynamic )
 
-#very important!!
-#otherwise in some machine,it will be built with c++11, you will find some error!!!!
-#set_property(TARGET example PROPERTY CXX_STANDARD 17)
+target_link_libraries(readexr_py
+        ${OpenCV_LIBS}
+        tftn_readexr_dynamic
+        -lIlmImf        #OpenEXR用的
+        )
 
-
-#target_link_libraries(example
-#        ${OpenCV_LIBS}
-#        tftn
-#        )
-#
-
-# install libtftn.so and libtftn_static.a
-#install(
-#        TARGETS tftn tftn_static
-#        LIBRARY DESTINATION lib/${PROJECT_NAME}  #静态库
-#        ARCHIVE DESTINATION lib/${PROJECT_NAME}
-#        EXPORT  DESTINATION lib/${PROJECT_NAME}
-#) #动态库
 
 # https://blog.csdn.net/qq_38410730/article/details/102837401
 set(CMAKE_INSTALL_LIBDIR  ${CMAKE_INSTALL_PREFIX}/lib)
@@ -135,7 +118,7 @@ message( "${BoldBlue}install include dir:"${ColourReset}\n ${CMAKE_INSTALL_INCLU
 #主要用于生成一个 TFTNTargets.cmake，用来给其他目录做子目录时候用。教程https://blog.csdn.net/weixin_30379531/article/details/98589931
 
 
-export(TARGETS  tftn_readexr_dynamic tftn_readexr_py  tftn_static   #tftn_dynamic
+export(TARGETS  tftn_readexr_dynamic tftn_readexr_py  tftn_static  
         APPEND FILE "${CMAKE_BINARY_DIR}/TFTNTargets.cmake"
         )
 
@@ -144,6 +127,12 @@ install(
         DESTINATION lib
         EXPORT ${PROJECT_NAME} #不知道为啥这里只能是这个project_name
 ) #安装静态链接库
+
+
+install (
+    TARGETS readexr_py 
+    LIBRARY DESTINATION ${CMAKE_SOURCE_DIR}/python_module_output )
+
 
 #install(FILES ${PROJECT_SOURCE_DIR}/include/tftn/tftn.h DESTINATION include)
 #安装头文件
@@ -166,7 +155,7 @@ message("!!"${CMAKE_CURRENT_LIST_FILE})
 
 
 
-return()
+#return()
 
 #debug用的代码
 get_cmake_property(_variableNames VARIABLES)

@@ -1,12 +1,9 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(tftn_cmake_example)
 
-
-
 add_definitions(-std=c++17)
 find_package(OpenCV  REQUIRED)
 find_package(TFTN REQUIRED)
-find_package(PythonLibs REQUIRED) #默认支持python3,不想支持2
 
 add_definitions(-DINPUT_FILE="${CMAKE_SOURCE_DIR}")
 
@@ -15,9 +12,6 @@ link_directories(
     #TODO
     #/usr/local/lib/
 )
-
-
-
 
 include_directories(
         ${OpenCV_INCLUDE_DIRS}
@@ -41,20 +35,6 @@ target_link_libraries(demo
         #-lIlmImf        #OpenEXR用的
         #-lpcgImageIO    #也是OpenEXR好像用的
         )
-
-
-add_executable(loadpy
-        ${CMAKE_SOURCE_DIR}/loadpy.cpp
-        )
-target_link_libraries(loadpy
-        ${TFTN_LIBS}
-        ${OpenCV_LIBS}
-        ${PYTHON_LIBRARY}
-        )
-
-
-
-
 
 return()
 get_cmake_property(_variableNames VARIABLES)

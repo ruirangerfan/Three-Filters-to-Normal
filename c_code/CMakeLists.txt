@@ -21,13 +21,18 @@ set(BoldMagenta "${Esc}[1;35m")
 set(BoldCyan    "${Esc}[1;36m")
 set(BoldWhite   "${Esc}[1;37m")
 
+#if you want to use python, change here. but maybe it has some bugs
+set(USE_PYTHON false)
+
 
 #you can change this version
 find_package(OpenCV  REQUIRED)
-find_package(PythonLibs 3.6 REQUIRED EXACT) #这里可以修改python的版本号
 find_package(Boost COMPONENTS system thread program_options)
+if (USE_PYTHON)
 find_package(pybind11 REQUIRED)
-
+find_package(PythonLibs 3.6 REQUIRED EXACT) #you can change python version here
+add_definitions(-DUSE_PYTHON)
+endif()
 
 
 
@@ -94,8 +99,8 @@ include_directories(
 #add_dependencies(tftn_readexr_py tftn_readexr_dynamic )
 
 #add_subdirectory(pybind11)
-#链接第三方库的时候，要加上PRIVATE
 #pybind11_add_module(Pypcc ${PROJECT_SOURCE_DIR}/include/tftn/py_readexr.cpp)
+if (USE_PYTHON)
 pybind11_add_module(readexr_py ${PROJECT_SOURCE_DIR}/pybind11/py_reader.cpp)
 
 add_dependencies(readexr_py PRIVATE tftn_readexr_dynamic )
@@ -105,6 +110,7 @@ target_link_libraries(readexr_py
         tftn_readexr_dynamic
         -lIlmImf        #OpenEXR用的
         )
+endif()
 
 
 # https://blog.csdn.net/qq_38410730/article/details/102837401
@@ -128,11 +134,11 @@ install(
         EXPORT ${PROJECT_NAME} #不知道为啥这里只能是这个project_name
 ) #安装静态链接库
 
-
+if (USE_PYTHON)
 install (
     TARGETS readexr_py 
     LIBRARY DESTINATION ${CMAKE_SOURCE_DIR}/python_module_output )
-
+endif()
 
 #install(FILES ${PROJECT_SOURCE_DIR}/include/tftn/tftn.h DESTINATION include)
 #安装头文件
@@ -155,7 +161,7 @@ message("!!"${CMAKE_CURRENT_LIST_FILE})
 
 
 
-#return()
+return()
 
 #debug用的代码
 get_cmake_property(_variableNames VARIABLES)

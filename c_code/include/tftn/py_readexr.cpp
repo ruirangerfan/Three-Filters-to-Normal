@@ -5,6 +5,7 @@
 
 //sudo apt-get install pybind11-dev 安装pybind11
 
+#ifdef USE_PYTHON
 //#define PY_SSIZE_T_CLEAN //Make "s#" use Py_ssize_t rather than int
 #include <Python.h> //这个一定要放在引用其他东西的前面，因为他可能重写一些标准的函数
 
@@ -59,3 +60,4 @@
     //return PyArray;
     //测试结果
 }
+#endif
